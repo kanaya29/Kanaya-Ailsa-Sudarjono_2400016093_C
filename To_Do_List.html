@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-Do App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 350px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        #taskList {
+            list-style: none;
+            padding: 0;
+        }
+
+        #taskList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #taskList li.finish {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .close {
+            color: red;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>My To-Do List</h2>
+        <input type="text" id="newTask" placeholder="Add a new task...">
+        <button onclick="addTask()">Add</button>
+
+        <ul id="taskList">
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById("newTask");
+            const taskList = document.getElementById("taskList");
+            const taskText = taskInput.value.trim();
+
+            if (taskText === "") return;
+
+            const li = document.createElement("li");
+            li.textContent = taskText;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "X";
+            deleteButton.className = "close";
+            deleteButton.onclick = function (e) {
+                e.stopPropagation();
+                deleteTask(li);
+            };
+            li.appendChild(deleteButton);
+            
+            li.addEventListener("dblclick", function () {
+                editTask(li);
+            });
+
+            li.addEventListener("click", function(e) {
+                    li.classList.toggle("finish");
+            });
+
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+    
+        function deleteTask(element) {
+            element.remove();
+        }
+
+        function editTask(element) {
+            const currentText = element.firstChild.textContent;
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = currentText;
+            input.className = "edit-input";
+
+            element.textContent = "";
+            element.appendChild(input);
+            input.focus();
+
+            function saveEdit() {
+                const newText = input.value.trim();
+                if (newText === "") {
+                    element.remove();
+                    return;
+                }
+                element.textContent = newText;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "X";
+                deleteButton.className = "close";
+                deleteButton.onclick = function (e) {
+                    e.stopPropagation();
+                    deleteTask(element);
+                };
+                element.appendChild(deleteButton); 
+            }
+
+            input.addEventListener("keypress", function (e) {
+                if (e.key === "Enter") saveEdit();
+            });
+            
+            input.addEventListener("blur", saveEdit);
+        }
+    </script>
+
+</body>
+
+</html>
