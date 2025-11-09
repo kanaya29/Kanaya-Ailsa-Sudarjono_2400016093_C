@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Facts</title>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .center-wrapper{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .fact-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        .fact-text  {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            border: none
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-wrapper">
+        <h1>
+            <span class="emoji">😜</span>
+            Random Useless Facts
+        </h1>
+        <div class="fact-box">
+            <div id="randomFact" class="fact-text">Loading...</div>
+            <button class="modern-btn" onclick="fetchRandomFact()">
+                <span class="emoji">🔄️</span> Get Another Random Fact
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const facts = [
+            "Honey never spoils.",
+            "Bananas are berries.",
+            "Octopuses have three hearts.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "An ostrich’s eye is bigger than its brain.",
+            "The Eiffel Tower can grow taller in summer."
+        ];
+
+        function fetchRandomFact() {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            document.getElementById("randomFact").innerText = facts[randomIndex];
+        }
+
+        fetchRandomFact();
+    </script>
+
+</body>
+</html>
