@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: gray;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 40px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 250px;
+            text-align: center;
+            height: 300px;
+        }
+
+        #display {
+            color: black;
+            text-align: center;
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .counter button {
+            background-color: rgb(56, 56, 56);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 30px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>COUNTER</h1>
+        <div id = "display">0</div>
+            <div class ="counter">
+                <button onclick="increase()">+</button>
+                <button onclick="decrease()">−</button>
+            </div>
+    </div>
+</body>
+
+<script>
+    let count = 0;
+    
+    function increase() {
+        count++;
+        document.getElementById("display").innerText = count;
+    }
+
+    function decrease() {
+        count--;
+        document.getElementById("display").innerText = count;
+    }
+</script>
+</html>
